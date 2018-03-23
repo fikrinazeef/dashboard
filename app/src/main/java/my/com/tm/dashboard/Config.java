@@ -127,7 +127,7 @@ public class Config {
 
     //ACTUAL FIBER
     public static final String TAG_JSON_ACTUAL_FIBER = "fiber";
-    public static final String URL_GET_ACTUAL_FIBER ="http://58.27.84.166/mcconline/MCC%20Online%20Dashboard_Faiz/query_listactual.php";
+    public static final String URL_GET_ACTUAL_FIBER ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listactual.php";
     public static final String TAG_STATEACTUALFIBER = "newfiber";
     public static final String TAG_SITEACTUALFIBER = "oldfiber";
     public static final String TAG_ACTUALABBRFIBER = "state";
@@ -147,7 +147,7 @@ public class Config {
 
     //ACTUAL SPINE COLO
     public static final String TAG_JSON_ACTUAL_COLO = "colo";
-    public static final String URL_GET_ACTUAL_COLO ="http://58.27.84.166/mcconline/MCC%20Online%20Dashboard_Faiz/query_listactual.php";
+    public static final String URL_GET_ACTUAL_COLO ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listactual.php";
     public static final String TAG_STATEACTUALCOLO = "newcolo";
     public static final String TAG_SITEACTUALCOLO = "oldcolo";
     public static final String TAG_ACTUALABBRCOLO = "state";

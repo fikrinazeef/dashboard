@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import my.dashboard.R;
 
@@ -40,45 +37,44 @@ public class ActualColo extends AppCompatActivity {
     }
     private void showEmployee(){
         JSONObject jsonObject = null;
-        ArrayList<HashMap<String,String>> list = new ArrayList  <HashMap<String, String>>();
+        ArrayList<ModelActualColo> listactual1 = new ArrayList<>();
+
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ACTUAL_COLO);
+            JSONArray result = jsonObject.getJSONArray("colo");
 
             for(int i = 0; i<result.length(); i++){
+
+                //GatedModel gatedModel = new GatedModel();
                 JSONObject jo = result.getJSONObject(i);
-                String a = jo.getString(Config.TAG_STATEACTUALCOLO);
-                String b = jo.getString(Config.TAG_SITEACTUALCOLO);
-                String c = jo.getString(Config.TAG_ACTUALABBRCOLO);
-                String d = jo.getString(Config.TAG_ACTUALOLDCOLO);
+                String a = jo.getString("newcolo");
+                String b = jo.getString("oldcolo");
+                String c = jo.getString("state");
+                String d = jo.getString("migdate");
+                String e = jo.getString("onplan");
 
+                ModelActualColo gatedModel = new ModelActualColo();
 
+                gatedModel.setNewc(a);
+                gatedModel.setOld(b);
+                gatedModel.setRegion(c);
+                gatedModel.setMigdate(d);
+                gatedModel.setPlan(e);
 
-
-                HashMap<String,String> employees = new HashMap<>();
-                employees.put(Config.TAG_STATEACTUALCOLO,a);
-                employees.put(Config.TAG_SITEACTUALCOLO,b);
-                employees.put(Config.TAG_ACTUALABBRCOLO,c);
-                employees.put(Config.TAG_ACTUALOLDCOLO,d);
-
-
-
-                list.add(employees);
-
+                listactual1.add(gatedModel);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ListAdapter adapter = new SimpleAdapter(
-                getApplicationContext(), list, R.layout.listactualall,
-                new String[]{Config.TAG_STATEACTUALCOLO,Config.TAG_SITEACTUALCOLO,Config.TAG_ACTUALABBRCOLO,Config.TAG_ACTUALOLDCOLO},
 
-                new int[]{R.id.dua, R.id.satu,  R.id.tiga, R.id.empat
-                });
+        final AdapterActualColo sanoAdapter = new AdapterActualColo(getApplicationContext(),R.layout.listnewactual,listactual1);
+        final ListView sanoview = (ListView) findViewById(R.id.list);
+        sanoview.setAdapter(sanoAdapter);
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(sanoAdapter);
+
 
     }
 

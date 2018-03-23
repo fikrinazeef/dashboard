@@ -6,16 +6,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.SimpleAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import my.dashboard.R;
 
@@ -38,46 +35,47 @@ public class ActualFiber extends AppCompatActivity {
         getJSON();
 
     }
+
     private void showEmployee(){
         JSONObject jsonObject = null;
-        ArrayList<HashMap<String,String>> list = new ArrayList  <HashMap<String, String>>();
+        ArrayList<ModelActualFiber> listactual1 = new ArrayList<>();
+
         try {
             jsonObject = new JSONObject(JSON_STRING);
-            JSONArray result = jsonObject.getJSONArray(Config.TAG_JSON_ACTUAL_FIBER);
+            JSONArray result = jsonObject.getJSONArray("fiber");
 
             for(int i = 0; i<result.length(); i++){
+
+                //GatedModel gatedModel = new GatedModel();
                 JSONObject jo = result.getJSONObject(i);
-                String a = jo.getString(Config.TAG_STATEACTUALFIBER);
-                String b = jo.getString(Config.TAG_SITEACTUALFIBER);
-                String c = jo.getString(Config.TAG_ACTUALABBRFIBER);
-                String d = jo.getString(Config.TAG_ACTUALOLDFIBER);
+                String a = jo.getString("newfiber");
+                String b = jo.getString("oldfiber");
+                String c = jo.getString("state");
+                String d = jo.getString("migdate");
+                String e = jo.getString("onplan");
 
+                ModelActualFiber gatedModel = new ModelActualFiber();
 
+                gatedModel.setNewc(a);
+                gatedModel.setOld(b);
+                gatedModel.setRegion(c);
+                gatedModel.setMigdate(d);
+                gatedModel.setPlan(e);
 
-
-                HashMap<String,String> employees = new HashMap<>();
-                employees.put(Config.TAG_STATEACTUALFIBER,a);
-                employees.put(Config.TAG_SITEACTUALFIBER,b);
-                employees.put(Config.TAG_ACTUALABBRFIBER,c);
-                employees.put(Config.TAG_ACTUALOLDFIBER,d);
-
-
-                list.add(employees);
-
+                listactual1.add(gatedModel);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
-        ListAdapter adapter = new SimpleAdapter(
-                getApplicationContext(), list, R.layout.listactualall,
-                new String[]{Config.TAG_STATEACTUALFIBER,Config.TAG_SITEACTUALFIBER,Config.TAG_ACTUALABBRFIBER,Config.TAG_ACTUALOLDFIBER},
 
-                new int[]{R.id.dua, R.id.satu,  R.id.tiga, R.id.empat
-                });
+        final AdapterActualFiber sanoAdapter = new AdapterActualFiber(getApplicationContext(),R.layout.listnewactual,listactual1);
+        final ListView sanoview = (ListView) findViewById(R.id.list);
+        sanoview.setAdapter(sanoAdapter);
 
-        listView.setAdapter(adapter);
+        listView.setAdapter(sanoAdapter);
+
 
     }
 
