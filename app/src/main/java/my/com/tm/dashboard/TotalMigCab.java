@@ -1,13 +1,18 @@
 package my.com.tm.dashboard;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 
@@ -20,7 +25,7 @@ import java.util.HashMap;
 
 import my.dashboard.R;
 
-public class TotalMigCab extends AppCompatActivity {
+public class TotalMigCab extends AppCompatActivity implements ListView.OnItemClickListener{
 
     RequestQueue rq;
     String catsubb,catcolo,catfiber,catquality,catrbb,catusp,catre;
@@ -37,6 +42,7 @@ public class TotalMigCab extends AppCompatActivity {
         setContentView(R.layout.listcategorycabinet);
 
         listView = (ListView) findViewById(R.id.list);
+        listView.setOnItemClickListener(this);
         subb = (TextView)findViewById(R.id.totalsubb);
         text = (TextView)findViewById(R.id.textView10);
 //        fiber = (TextView)findViewById(R.id.totalfiber);
@@ -115,5 +121,23 @@ public class TotalMigCab extends AppCompatActivity {
         }
         GetJSON gj = new GetJSON();
         gj.execute();
+    }
+
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        Intent intent = new Intent(getApplicationContext(), ListMigCab.class);
+        HashMap<String, String> map = (HashMap) parent.getItemAtPosition(position);
+        String empId = map.get(Config.TAG_CATPRO).toString();
+        intent.putExtra("newsubb", empId);
+
+        Context context = getApplicationContext();
+        CharSequence text = empId;
+        int duration = Toast.LENGTH_SHORT;
+
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
+
+        startActivity(intent);
     }
 }

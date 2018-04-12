@@ -34,7 +34,7 @@ import my.dashboard.R;
 public class PofileActivity extends Fragment implements View.OnClickListener {
 
     RequestQueue rq;
-    String plansubb,actualsubb,planfiber,actualfiber,planspine,actualspine,unresolved;
+    String plansubb,actualsubb,planfiber,actualfiber,planspine,actualspine,unresolved,balancesubb,balancecolo,balancefiber;
     String totaltt,ttmonitoring,plantodays,migrated,handedover,nis;
     //firebase auth object
     private FirebaseAuth firebaseAuth;
@@ -45,7 +45,7 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
     private TextView un,tt,monitor,balsubb,balfiber,balspine,plantoday;
     private TextView textview6,tst,textt,textView22,mitos,mint,actualfiberr,actualf;
     private TextView plansubbbb,plansubbb,actualsub,actualsubbb,planfibers,planfiberz;
-    private TextView plancolo,planspines,actualcolo,actualspines,handed,niss;
+    private TextView plancolo,planspines,actualcolo,actualspines,handed,niss,b,a,l;
    // private TextView
     private EditText cpass;
 
@@ -67,6 +67,7 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
         textViewDate.setText(currentDate);
 
         refreshs = (ImageView)myView.findViewById(R.id.refresh);
+
 
         textview6 = (TextView)myView.findViewById(R.id.textView6);
         tst = (TextView)myView.findViewById(R.id.tst);
@@ -102,6 +103,10 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
         balfiber = (TextView) myView.findViewById(R.id.balancefiber);
         balspine = (TextView) myView.findViewById(R.id.balancespine);
 
+        b = (TextView) myView.findViewById(R.id.bala);
+        a = (TextView) myView.findViewById(R.id.balan);
+        l = (TextView) myView.findViewById(R.id.balanc);
+
         handed = (TextView) myView.findViewById(R.id.handed);
 
         textViewUserEmail = (TextView) myView.findViewById(R.id.textViewUserEmail);
@@ -124,6 +129,12 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
         planspines.setOnClickListener(this);
         actualcolo.setOnClickListener(this);
         aspine.setOnClickListener(this);
+        balsubb.setOnClickListener(this);
+        balspine.setOnClickListener(this);
+        balfiber.setOnClickListener(this);
+        b.setOnClickListener(this);
+        a.setOnClickListener(this);
+        l.setOnClickListener(this);
 
         refreshs.setOnClickListener(this);
 
@@ -147,8 +158,9 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
         sendrequest2();
         sendrequest3();
         sendrequest4();
-
-
+        sendrequest5();
+        sendrequest6();
+        sendrequest7();
         return myView;
     }
 
@@ -161,35 +173,8 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
             public void onResponse(JSONObject response) {
                 try{
                     plantodays = response.getString("totalplan");
-                 //   plansubb = response.getString("totalplansubb");
-                   // actualsubb = response.getString("totalactualsubb");
-                  //  planfiber = response.getString("totalplanefiber");
-                   // actualfiber = response.getString("totalactualefiber");
-             //       planspine = response.getString("totalplancolo");
-                    //actualspine = response.getString("totalactualecolo");
-//
-//                    actualspine = response.getString("totalactual");
-                    plantoday.setText(plantodays);
-               //     psubb.setText(plansubb);
-                 //   asubb.setText(actualsubb);
-             //       pfiber.setText(planfiber);
-                 //   afiber.setText(actualfiber);
-               //     pspine.setText(planspine);
-                   // aspine.setText(actualspine);
+                    mint.setText(plantodays);
 
-
-//                    int x=Integer.parseInt(psubb.getText().toString());
-//                    int y=Integer.parseInt(asubb.getText().toString());
-//                    int z=x-y;
-//                    String zstr = String.valueOf(z);
-//                    balsubb.setText(zstr);
-//
-//                    int a=Integer.parseInt(pfiber.getText().toString());
-//                    int b=Integer.parseInt(afiber.getText().toString());
-//                    int c=a-b;
-//                    String zstq = String.valueOf(c);
-//                    balfiber.setText(zstq);
-//
 //                    int d=Integer.parseInt(pspine.getText().toString());
 //                    int e=Integer.parseInt(aspine.getText().toString());
 //                    int f=d-e;
@@ -301,6 +286,7 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
                             actualfiber = response.getString("fiber");
                             actualspine = response.getString("colo");
 
+
                             psubb.setText(plansubb);
                             pfiber.setText(planfiber);
                             pspine.setText(planspine);
@@ -309,23 +295,7 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
                             afiber.setText(actualfiber);
                             aspine.setText(actualspine);
 
-                            int x=Integer.parseInt(psubb.getText().toString());
-                            int y=Integer.parseInt(asubb.getText().toString());
-                            int z=x-y;
-                            String zstr = String.valueOf(z);
-                            balsubb.setText(zstr);
 
-                            int a=Integer.parseInt(pfiber.getText().toString());
-                            int b=Integer.parseInt(afiber.getText().toString());
-                            int c=a-b;
-                            String zstq = String.valueOf(c);
-                            balfiber.setText(zstq);
-
-                            int d=Integer.parseInt(pspine.getText().toString());
-                            int e=Integer.parseInt(aspine.getText().toString());
-                            int f=d-e;
-                            String zste = String.valueOf(f);
-                            balspine.setText(zste);
 
                         }catch (JSONException e){
                             e.printStackTrace();
@@ -341,7 +311,81 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
                 });
         rq.add(jsonObjectRequest);
     }
+    public void sendrequest5(){
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
+                (Request.Method.GET,Config.SUBB , null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+                            balancesubb = response.getString("countsubb");
+                            balsubb.setText(balancesubb);
 
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+                        , new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        rq.add(jsonObjectRequest);
+    }
+    public void sendrequest6(){
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
+                (Request.Method.GET,Config.COLO , null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+//                            balancesubb = response.getString("countsubb");
+//                            balancefiber = response.getString("fiber");
+                            balancecolo = response.getString("countcolo");
+
+//                            balsubb.setText(balancesubb);
+//                            balfiber.setText(balancefiber);
+                            balspine.setText(balancecolo);
+
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                        , new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        rq.add(jsonObjectRequest);
+    }
+    public void sendrequest7(){
+        JsonObjectRequest jsonObjectRequest= new JsonObjectRequest
+                (Request.Method.GET,Config.FIBER , null, new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try{
+
+                            balancefiber = response.getString("countfiber");
+                            balfiber.setText(balancefiber);
+
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                        }
+                    }
+                }
+
+                        , new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                });
+        rq.add(jsonObjectRequest);
+    }
     @Override
     public void onClick(View view) {
         //if logout is pressed
@@ -430,6 +474,22 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
             //finish();
             startActivity(new Intent(getActivity(), ActualColo.class));
         }
+        if(view == balsubb) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceSubb.class));
+        }
+        if(view == b) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceSubb.class));
+        }
+        if(view == a) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceFiber.class));
+        }
+        if(view == l) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceColo.class));
+        }
         if(view == refreshs) {
             //finish();
             FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -437,6 +497,18 @@ public class PofileActivity extends Fragment implements View.OnClickListener {
             //startActivity(new Intent(getActivity(), MainActivity.class));
             Toast.makeText(getActivity(),"REFRESH",
                     Toast.LENGTH_LONG).show();
+        }
+        if(view == balspine) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceColo.class));
+        }
+        if(view == balfiber) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceFiber.class));
+        }
+        if(view == balsubb) {
+            //finish();
+            startActivity(new Intent(getActivity(), BalanceSubb.class));
         }
     }
 }

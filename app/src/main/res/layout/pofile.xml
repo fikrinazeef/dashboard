@@ -9,26 +9,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="20dp">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
     <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="end"
-        android:id="@+id/hi"
-
-        >
-
+        android:id="@+id/hi">
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="end">
-
             <TextView
                 android:id="@+id/time"
                 android:text=""
@@ -192,7 +186,7 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/dw"
+                android:id="@+id/bala"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -290,7 +284,7 @@
                 android:layout_height="wrap_content"/>
 
             <TextView
-                android:id="@+id/dwa"
+                android:id="@+id/balanc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
@@ -387,9 +381,9 @@
                 android:textSize="16dp" />
 
             <TextView
-                android:id="@+id/dwat"
+                android:id="@+id/balan"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
 
                 android:layout_gravity="center"
                 android:layout_marginLeft="20dp"

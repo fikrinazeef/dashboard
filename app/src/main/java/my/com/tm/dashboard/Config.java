@@ -154,6 +154,9 @@ public class Config {
     public static final String TAG_ACTUALOLDCOLO = "migdate";
 
 
+    //total balance
+    public static final String TOTAL_BALANCE ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_balance.php";
+
     //MIGRATED CATEGORY
     public static final String TAG_JSON_CAT = "listcategory";
     public static final String URL_GET_CAT ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listcategory.php";
@@ -161,9 +164,27 @@ public class Config {
     public static final String TAG_CATTOTAL = "total";
 
 
-    public static final String TAG_JSON_NIS = "RequestNISBulkChange";
-    public static final String URL_GET_NIS ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_NISBulkChange.php";
-    public static final String TAG_NEW = "New Cabinet";
-    public static final String TAG_REMARK = "Remark";
+    //balance subb
+    public static final String URL_BAL_SUBB ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listbalancesubb.php";
+    public static final String TAG_SUBB = "newsubb";
+    public static final String TAG_REGI = "region";
+    public static final String TAG_PHASE = "phase";
+    public static final String TAG_VDSL = "planvdsl";
+
+    //subb
+    public static final String SUBB="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_balancesubb.php";
+    //colo
+    public static final String COLO="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_balancecolo.php";
+    //fiber
+    public static final String FIBER="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_balancefiber.php";
+
+    //balance fiber
+    public static final String URL_BAL_FIBER ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listbalancefiber.php";
+
+    //balance colo
+    public static final String URL_BAL_COLO ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listbalancecolo.php";
+
+    //list mig cabinet
+    public static final String URL_LIST_MIG_CAB ="http://58.27.84.166/mcconline/MCC%20Online%20V3/query_listbycategory.php";
 
 }
